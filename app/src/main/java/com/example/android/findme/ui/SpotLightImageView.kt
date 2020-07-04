@@ -2,9 +2,7 @@ package com.example.android.findme.ui
 
 
 import android.content.Context
-import android.graphics.BitmapFactory
-import android.graphics.Paint
-import android.graphics.RectF
+import android.graphics.*
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
 import com.example.android.findme.R
@@ -27,8 +25,26 @@ class SpotLightImageView @JvmOverloads constructor(
         R.drawable.android
     )
 
-    val maskBitmap = BitmapFactory.decodeResource(
+    val spotlight = BitmapFactory.decodeResource(
         resources,
         R.drawable.mask
     )
+
+    init {
+        val bitmap = Bitmap.createBitmap(spotlight.width, spotlight.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        val shaderPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+
+        shaderPaint.color = Color.BLACK
+        canvas.drawRect(
+            0.0f,
+            0.0f,
+            spotlight.width.toFloat(),
+            spotlight.height.toFloat(),
+            shaderPaint
+        )
+
+        print("TAG - Init complete")
+
+    }
 }
