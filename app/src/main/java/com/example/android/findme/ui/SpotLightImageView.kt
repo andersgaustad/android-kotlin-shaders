@@ -57,4 +57,19 @@ class SpotLightImageView @JvmOverloads constructor(
         paint.shader = shader
 
     }
+
+    override fun onDraw(canvas: Canvas?) {
+        super.onDraw(canvas)
+
+        canvas?.apply {
+            drawColor(Color.YELLOW)
+            drawRect(
+                0.0f,
+                0.0f,
+                width.toFloat(),
+                height.toFloat(),
+                paint
+            )
+        }
+    }
 }
