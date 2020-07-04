@@ -44,7 +44,9 @@ class SpotLightImageView @JvmOverloads constructor(
             shaderPaint
         )
 
-        print("TAG - Init complete")
+        // Step 2
+        shaderPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_OUT)
+        canvas.drawBitmap(spotlight, 0.0f, 0.0f, shaderPaint)
 
     }
 }
