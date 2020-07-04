@@ -20,6 +20,9 @@ class SpotLightImageView @JvmOverloads constructor(
     private var androidBitmapX = 0f
     private var androidBitmapY = 0f
 
+    private lateinit var shader : Shader
+
+
     val androidBitmap = BitmapFactory.decodeResource(
         resources,
         R.drawable.android
@@ -47,6 +50,11 @@ class SpotLightImageView @JvmOverloads constructor(
         // Step 2
         shaderPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_OUT)
         canvas.drawBitmap(spotlight, 0.0f, 0.0f, shaderPaint)
+
+
+        // Step 3
+        shader = BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
+        paint.shader = shader
 
     }
 }
