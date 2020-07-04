@@ -22,6 +22,9 @@ class SpotLightImageView @JvmOverloads constructor(
 
     private lateinit var shader : Shader
 
+    private val shaderMatrix = Matrix()
+
+
 
     val androidBitmap = BitmapFactory.decodeResource(
         resources,
@@ -63,6 +66,13 @@ class SpotLightImageView @JvmOverloads constructor(
 
         canvas?.apply {
             drawColor(Color.YELLOW)
+
+            shaderMatrix.setTranslate(
+                500f,
+                1000f
+            )
+            shader.setLocalMatrix(shaderMatrix)
+
             drawRect(
                 0.0f,
                 0.0f,
@@ -70,6 +80,7 @@ class SpotLightImageView @JvmOverloads constructor(
                 height.toFloat(),
                 paint
             )
+
         }
     }
 }
