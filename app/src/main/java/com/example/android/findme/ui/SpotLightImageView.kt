@@ -23,7 +23,7 @@ class SpotLightImageView @JvmOverloads constructor(
     private var androidBitmapX = 0f
     private var androidBitmapY = 0f
 
-    private lateinit var shader : Shader
+    private var shader : Shader
 
     private val shaderMatrix = Matrix()
 
