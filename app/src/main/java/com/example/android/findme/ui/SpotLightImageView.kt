@@ -76,25 +76,20 @@ class SpotLightImageView @JvmOverloads constructor(
                 paint
             )
 
-            /*
-            drawColor(Color.YELLOW)
+            if (!gameOver) {
+                if (shouldDrawSpotLight) {
+                    drawRect(
+                        0.0f,
+                        0.0f,
+                        width.toFloat(),
+                        height.toFloat(),
+                        paint
+                    )
 
-            shaderMatrix.setTranslate(
-                500f,
-                1000f
-            )
-            shader.setLocalMatrix(shaderMatrix)
-
-            drawRect(
-                0.0f,
-                0.0f,
-                width.toFloat(),
-                height.toFloat(),
-                paint
-            )
-
-             */
-
+                } else {
+                    drawColor(Color.BLACK)
+                }
+            }
         }
     }
 
