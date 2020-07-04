@@ -6,6 +6,8 @@ import android.graphics.*
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
 import com.example.android.findme.R
+import kotlin.math.floor
+import kotlin.random.Random
 
 class SpotLightImageView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -65,6 +67,15 @@ class SpotLightImageView @JvmOverloads constructor(
         super.onDraw(canvas)
 
         canvas?.apply {
+            drawColor(Color.WHITE)
+            drawBitmap(
+                androidBitmap,
+                androidBitmapX,
+                androidBitmapY,
+                paint
+            )
+
+            /*
             drawColor(Color.YELLOW)
 
             shaderMatrix.setTranslate(
@@ -81,6 +92,28 @@ class SpotLightImageView @JvmOverloads constructor(
                 paint
             )
 
+             */
+
         }
+    }
+
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+        setUpWinnerRect()
+    }
+
+
+    // Private
+
+    private fun setUpWinnerRect() {
+        androidBitmapX = floor(Random.nextFloat() * (width - androidBitmap.width))
+        androidBitmapY = floor(Random.nextFloat() * (height - androidBitmap.height))
+
+        winnerRect = RectF(
+            androidBitmapX,
+            androidBitmapY,
+            androidBitmapX + androidBitmap.width,
+            androidBitmapY + androidBitmap.height
+        )
     }
 }
