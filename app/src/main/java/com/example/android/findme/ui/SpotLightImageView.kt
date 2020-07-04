@@ -4,6 +4,7 @@ package com.example.android.findme.ui
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
+import android.view.MotionEvent
 import androidx.appcompat.widget.AppCompatImageView
 import com.example.android.findme.R
 import kotlin.math.floor
@@ -100,6 +101,39 @@ class SpotLightImageView @JvmOverloads constructor(
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         setUpWinnerRect()
+    }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        if (event != null) {
+            val motionEventX = event.x
+            val motionEventY = event.y
+
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    shouldDrawSpotLight = true
+                    if (gameOver) {
+                        gameOver = false
+                        setUpWinnerRect()
+                    }
+                }
+
+                MotionEvent.ACTION_UP -> {
+                    shouldDrawSpotLight = false
+                    gameOver = winnerRect.contains(motionEventX, motionEventY)
+                }
+            }
+
+            // Update shader matrix
+            shaderMatrix.setTranslate(
+                motionEventX - spotlight.width / 2.0f,
+                motionEventY - spotlight.height / 2.0f
+            )
+        }
+        shader.setLocalMatrix(shaderMatrix)
+
+        // Need to redraw
+        invalidate()
+        return event != null
     }
 
 
